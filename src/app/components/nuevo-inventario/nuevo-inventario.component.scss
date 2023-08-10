@@ -1,0 +1,29 @@
+.container-fluid{
+    background: rgb(139, 137, 137);
+    height: 100%;
+    padding-top: 5%;
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .secciones {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: nowrap;
+            margin-top: 5%;
+            width: 100%;
+        }
+        .botonFinalizar {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: nowrap;
+            margin-top: 5%;
+            width: 100%;
+        }
+    }
+}
+
+.spacingComponents {
+    margin-right: 2%;
+}

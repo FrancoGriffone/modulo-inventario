@@ -1,0 +1,18 @@
+.main {
+    background: rgb(139, 137, 137);
+    height: 750px;
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        .botones {
+            margin: 5%;
+            button {
+                max-width: 250px;
+                max-height: 150px;
+            }
+        }
+    }    
+}

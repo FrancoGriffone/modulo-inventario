@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="container card card-body">
+        <div class="secciones">
+            <button class="btn btn-primary spacingComponents" style="width: 75px; height: 60px;">Crear</button>
+            <mat-form-field class="spacingComponents" appearance="fill">
+                <mat-label>Nombre del inventario</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="spacingComponents">
+                <mat-label>Fecha</mat-label>
+                <input type=date matInput/>
+              </mat-form-field>
+        </div>
+        <div class="secciones">
+            <button class="btn btn-primary spacingComponents" style="width: 100px; height: 70px;">Agregar marcas</button>
+            <mat-form-field appearance="fill" class="spacingComponents">
+                <mat-label disabled>Selecciona las marcas</mat-label>
+                <mat-select>
+                  <mat-option value="ADMRIOIV">prueba</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="secciones">LISTA LISTA LISTA</div>
+        <div class="secciones">
+            <button class="btn btn-primary spacingComponents" style="width: 100px; height: 70px;">Agregar depósito</button>
+            <mat-form-field appearance="fill" class="spacingComponents">
+                <mat-label disabled>Selecciona un depósito</mat-label>
+                <mat-select>
+                  <mat-option value="ADMRIOIV">prueba</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="secciones">LISTA LISTA LISTA</div>
+        <div class="botonFinalizar">
+            <button class="btn btn-success spacingComponents" style="width: 100px; height: 70px;" (click)="comenzar()">Comenzar</button>
+        </div>
+    </div>    
+</div>
