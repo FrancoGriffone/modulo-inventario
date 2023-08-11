@@ -67,7 +67,7 @@ export class NuevoInventarioComponent {
       this.toastrSvc.success(`¡Se añadió la marca: ${this.marcaSeleccionada.marca} correctamente!`)
       this.marcasSeleccionadas.push(this.marcaSeleccionada)
     } else {
-      this.toastrSvc.error('No puedes ingresar un producto que ya habías ingresado el producto anteriormente')
+      this.toastrSvc.error('No puedes ingresar una marca que ya habías ingresado anteriormente')
     }
   }
 

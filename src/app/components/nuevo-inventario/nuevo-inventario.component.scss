@@ -1,12 +1,12 @@
 .container-fluid{
     background: rgb(139, 137, 137);
-    height: 100%;
-    padding-top: 5%;
+    padding: 5% 0% 5% 0%;
     .container {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        height: 100%;
         .secciones {
             display: flex;
             justify-content: space-around;
