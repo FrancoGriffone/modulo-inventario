@@ -1,38 +1,64 @@
-<div class="container-fluid">
+<form class="container-fluid" [formGroup]="profileForm">
     <div class="container card card-body">
         <div class="secciones">
-            <button class="btn btn-primary spacingComponents" style="width: 75px; height: 60px;">Crear</button>
+            <!-- <button class="btn btn-primary spacingComponents" style="width: 40%; height: 50%;">Crear</button> -->
             <mat-form-field class="spacingComponents" appearance="fill">
                 <mat-label>Nombre del inventario</mat-label>
-                <input matInput>
+                <input matInput formControlName="nombreInventario">
             </mat-form-field>
             <mat-form-field appearance="fill" class="spacingComponents">
-                <mat-label>Fecha</mat-label>
-                <input type=date matInput/>
-              </mat-form-field>
+              <mat-label>Fecha</mat-label>
+              <input type="date" matInput formControlName="fecha"/>
+            </mat-form-field>
         </div>
         <div class="secciones">
-            <button class="btn btn-primary spacingComponents" style="width: 100px; height: 70px;">Agregar marcas</button>
+            <button class="btn btn-primary spacingComponents" style="width: 40%; height: 50%;" (click)="agregarMarca()">Agregar marcas</button>
             <mat-form-field appearance="fill" class="spacingComponents">
                 <mat-label disabled>Selecciona las marcas</mat-label>
-                <mat-select>
-                  <mat-option value="ADMRIOIV">prueba</mat-option>
+                <mat-select [formControl]="marca">
+                  <mat-option>
+                    <ngx-mat-select-search placeholderLabel="Buscar"></ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option value={{marca.id}} *ngFor="let marca of marcas">{{marca.marca}}</mat-option>
                 </mat-select>
               </mat-form-field>
         </div>
-        <div class="secciones">LISTA LISTA LISTA</div>
+        <h3>Seleccionaste: {{marcaSeleccionada?.marca}}</h3>
         <div class="secciones">
-            <button class="btn btn-primary spacingComponents" style="width: 100px; height: 70px;">Agregar depósito</button>
+          <table class="datosDeposito">
+            <tr>
+              <td style="padding: 10px;"><b>Nombre</b></td>
+              <td style="padding: 10px;"><b>Código</b></td>
+            </tr>
+            <tr *ngFor="let selec of marcasSeleccionadas">
+              <td>{{selec?.marca}}</td>
+              <td>{{selec?.id}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="secciones">
+            <button class="btn btn-primary spacingComponents" style="width: 40%; height: 50%;" (click)="agregarDeposito()">Agregar depósito</button>
             <mat-form-field appearance="fill" class="spacingComponents">
                 <mat-label disabled>Selecciona un depósito</mat-label>
-                <mat-select>
-                  <mat-option value="ADMRIOIV">prueba</mat-option>
+                <mat-select [formControl]="depo">
+                  <mat-option value={{deposito.id}} *ngFor="let deposito of depositos">{{deposito.deposito}}</mat-option>
                 </mat-select>
               </mat-form-field>
         </div>
-        <div class="secciones">LISTA LISTA LISTA</div>
+        <div class="secciones">
+          <table class="datosDeposito">
+            <tr>
+              <td>Nombre del depósito:</td>
+              <td>{{depositoSeleccionado?.deposito}}</td>
+            </tr>
+            <tr>
+              <td>ID del depósito:</td>
+              <td>{{depositoSeleccionado?.id}}</td>
+            </tr>
+          </table>
+        </div>
         <div class="botonFinalizar">
-            <button class="btn btn-success spacingComponents" style="width: 100px; height: 70px;" (click)="comenzar()">Comenzar</button>
+            <button class="btn btn-success spacingComponents" style="width: 50%; height: 50%;" (click)="comenzar()" [disabled]="profileForm.invalid">Comenzar</button>
         </div>
     </div>    
-</div>
+</form>

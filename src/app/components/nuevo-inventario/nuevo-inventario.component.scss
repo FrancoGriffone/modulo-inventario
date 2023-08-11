@@ -10,9 +10,19 @@
         .secciones {
             display: flex;
             justify-content: space-around;
+            align-items: center;
             flex-wrap: nowrap;
             margin-top: 5%;
             width: 100%;
+            .datosDeposito {
+                width: 50%;
+                td{
+                    padding: 10px;
+                    border: 2px solid black;
+                    width: 50%;
+                    text-align: center;
+                }
+            }
         }
         .botonFinalizar {
             display: flex;

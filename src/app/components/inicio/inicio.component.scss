@@ -1,18 +1,18 @@
-.main {
+.container-fluid {
     background: rgb(139, 137, 137);
-    height: 750px;
-    .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .card {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100%;
+        max-width: 400px;
+        height: 50%;
         .botones {
             margin: 5%;
-            button {
-                max-width: 250px;
-                max-height: 150px;
-            }
         }
     }    
 }
