@@ -1,25 +1,25 @@
-<div class="container-fluid">
+<form class="container-fluid" [formGroup]="profileForm">
     <div class="card card-body">
         <div class="seccion1">
-            <h2 class="spacingComponents">Inventario N°</h2>
+            <h2 class="spacingComponents">Inventario:</h2>
             <mat-form-field class="spacingComponents" appearance="fill">
                 <mat-label>Nombre del inventario</mat-label>
-                <input matInput>
+                <input matInput value="{{idInventario}} - {{nombre}}" readonly="disabled">
             </mat-form-field>
         </div>
         <div class="seccion2">
             <div class="ubicacion">
                 <h3 class="spacingComponents">Ubicación:</h3>
                 <mat-form-field class="spacingComponents" appearance="fill">
-                    <mat-label>Ubicacion</mat-label>
-                    <input matInput>
+                    <mat-label>Ubicación</mat-label>
+                    <input matInput formControlName="ubicacion">
                 </mat-form-field>
             </div>
             <div class="nombre">
                 <h3 class="spacingComponents">Nombre:</h3>
                 <mat-form-field class="spacingComponents" appearance="fill">
                     <mat-label>Nombre</mat-label>
-                    <input matInput>
+                    <input matInput formControlName="nombre">
                 </mat-form-field>
             </div>
         </div>
@@ -27,28 +27,39 @@
             <h5 class="spacingComponents">Fichar productos</h5>
             <mat-form-field class="spacingComponents" appearance="fill">
                 <mat-label>Fichar productos</mat-label>
-                <input matInput>
+                <input matInput formControlName="fichador" (blur)="ficharProd()">
             </mat-form-field>
         </div>
+        <ng-template [ngIf]="prod != undefined">
+            <h2>Acabas de fichar: {{this.profileForm.value.fichador}} - {{prod}}</h2>
+        </ng-template>
         <div class="fichajes">
             <div class="artFichados">
-                <h5 class="spacingComponents">Cantidad de art. fichados:</h5>
-                <mat-form-field class="spacingComponents" appearance="fill">
-                    <mat-label>Fichados</mat-label>
-                    <input matInput>
-                </mat-form-field>
+                <div>
+                    <h5 class="spacingComponents">Cantidad de art. fichados:</h5>
+                </div>
+                <div>
+                    <mat-form-field class="spacingComponents" appearance="fill">
+                        <mat-label>Fichados</mat-label>
+                        <input matInput formControlName="contadorFichados" value={{contadorFichados}}>
+                    </mat-form-field>
+                </div>
             </div>
             <div class="fichadosErroneos">
-                <h5 class="spacingComponents">Fichados erroneos:</h5>
-                <mat-form-field class="spacingComponents" appearance="fill">
-                    <mat-label>Errores</mat-label>
-                    <input matInput>
-                </mat-form-field>
+                <div>
+                    <h5 class="spacingComponents">Fichados erroneos:</h5>
+                </div>
+                <div>
+                    <mat-form-field class="spacingComponents" appearance="fill">
+                        <mat-label>Errores</mat-label>
+                        <input matInput formControlName="contadorErrores" value={{contadorErrores}}>
+                    </mat-form-field>
+                </div>
             </div>
         </div>
         <div class="botones">
             <button class="btn btn-danger spacingComponents" style="width: 50%; height: 60px;" type="reset">Resetear</button>
-            <button class="btn btn-primary spacingComponents" style="width: 50%; height: 60px;">Finalizar ubicación</button>
+            <button class="btn btn-primary spacingComponents" style="width: 50%; height: 60px;" (click)="finalizar()" [disabled]="profileForm.invalid">Finalizar ubicación</button>
         </div>
     </div>
-</div>
+</form>

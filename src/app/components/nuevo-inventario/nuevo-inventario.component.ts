@@ -13,9 +13,9 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class NuevoInventarioComponent {
 
-  idMarcas: any = []
+  idMarcas: any = [] //ARRAY CON ID DE MARCAS EN NUMBER
   
-  idDeposito: any = ""
+  idDeposito: any = "" //ID DEPOSITO
 
   fecha = new Date().toISOString().substring(0,10) //FECHA PARA FORM
 
@@ -45,7 +45,7 @@ export class NuevoInventarioComponent {
       this.api.nuevoInvetario(inventario).subscribe((data)=>{
         console.log(data)
       })
-      this.router.navigate(["nuevoinventario/pantallainventario"])
+      this.router.navigate(["nuevoinventario/pantallainventario/" + this.profileForm.value.nombreInventario])
     } else if (this.idDeposito == "" && this.idMarcas.length !== 0){
       this.toastrSvc.warning('No seleccionaste ningún depósito')
     } else {
@@ -80,6 +80,7 @@ export class NuevoInventarioComponent {
     this.idDeposito = this.depositoSeleccionado.id
   }
 
+  //FORM CONTROLS PARA USO DE LA PAGINA
   marca = new FormControl('');
   depo = new FormControl('')
 

@@ -4,6 +4,9 @@
     padding-top: 5%;
     .card {
         margin: 8%;
+        h2 {
+            text-align: center;
+        }
     }
     .seccion1 {
         display: flex;
@@ -35,6 +38,12 @@
             flex-direction: row;
             align-items: center;
             margin-left: 30%;
+            div {
+                width: 50%;
+                mat-form-field {
+                    width: 100%;
+                }
+            }
         }
     }
     .botones {
