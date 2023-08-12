@@ -1,6 +1,9 @@
 .container-fluid{
     background: rgb(139, 137, 137);
     padding: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .card {
         h2 {
             text-align: center;
@@ -12,6 +15,9 @@
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
+        mat-form-field {
+            width: 100%;
+        }
     }
     .seccion2 {
         display: flex;
@@ -20,6 +26,9 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+            mat-form-field {
+                width: 100%;
+            }
         }
     }
     .fichador {
@@ -52,4 +61,15 @@
 
 .spacingComponents {
     margin-right: 2%;
+}
+
+
+@media screen and (min-width: 500px) {
+    .card {
+        margin: 0% 20% 10% 20%;
+        .fichador {
+            display: flex;
+            justify-content: center;
+        }
+    }
 }

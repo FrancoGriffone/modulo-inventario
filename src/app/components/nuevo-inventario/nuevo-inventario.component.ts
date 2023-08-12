@@ -45,7 +45,7 @@ export class NuevoInventarioComponent {
       this.api.nuevoInvetario(inventario).subscribe((data)=>{
         console.log(data)
       })
-      this.router.navigate(["nuevoinventario/pantallainventario/" + this.profileForm.value.nombreInventario])
+      this.router.navigate(["pantallainventario/" + this.profileForm.value.nombreInventario])
     } else if (this.idDeposito == "" && this.idMarcas.length !== 0){
       this.toastrSvc.warning('No seleccionaste ningún depósito')
     } else {

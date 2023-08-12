@@ -14,6 +14,9 @@
             flex-wrap: nowrap;
             margin-top: 5%;
             width: 100%;
+            mat-form-field {
+                width: 100%;
+            }
             .datosDeposito {
                 width: 50%;
                 td{

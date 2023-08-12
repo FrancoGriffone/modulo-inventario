@@ -22,7 +22,7 @@ const routes: Routes = [
 },
 //LINK A LA PANTALLA DEL INVENTARIO
 {
-  path: 'nuevoinventario/pantallainventario/:inv',
+  path: 'pantallainventario/:inv',
   component: PantallaInventarioComponent
 },
 //LINK PAGE NOT FOUND
