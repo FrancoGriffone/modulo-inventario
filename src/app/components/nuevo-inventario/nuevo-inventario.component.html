@@ -1,6 +1,8 @@
 <form class="container-fluid" [formGroup]="profileForm">
     <div class="container card card-body">
       <h1><b>Crear un nuevo inventario</b></h1>
+
+      <!-- NOMBRE Y FECHA SECCION -->
         <div class="secciones">
             <mat-form-field class="spacingComponents" appearance="fill">
                 <mat-label>Nombre del inventario</mat-label>
@@ -11,6 +13,8 @@
               <input type="date" matInput formControlName="fecha"/>
             </mat-form-field>
         </div>
+
+        <!-- SELECTOR DE MARCAS SECCION -->
         <div class="secciones">
             <button class="btn btn-primary spacingComponents" style="width: 40%; height: 50%;" (click)="agregarMarca()">Agregar marcas</button>
             <mat-form-field appearance="fill" class="spacingComponents">
@@ -19,10 +23,12 @@
                   <mat-option>
                     <ngx-mat-select-search placeholderLabel="Buscar"></ngx-mat-select-search>
                   </mat-option>
+                  <!-- BUSCA ENTRE LAS MARCAS CARGADAS EN LA API -->
                   <mat-option value={{marca.id}} *ngFor="let marca of marcas">{{marca.marca}}</mat-option>
                 </mat-select>
               </mat-form-field>
         </div>
+        <!-- MUESTRA LA ÚLTIMA MARCA SELECIONADA -->
         <h2>Seleccionaste: {{marcaSeleccionada?.marca}}</h2>
         <div class="secciones">
           <table class="datosDeposito">
@@ -30,12 +36,15 @@
               <td style="padding: 10px;"><b>Nombre</b></td>
               <td style="padding: 10px;"><b>Código</b></td>
             </tr>
+            <!-- VA SETEANDO LAS MARCAS QUE SE FUERON SELECCIONADO -->
             <tr *ngFor="let selec of marcasSeleccionadas">
               <td>{{selec?.marca}}</td>
               <td>{{selec?.id}}</td>
             </tr>
           </table>
         </div>
+
+        <!-- SELECTOR DE DEPOSITO SECCION -->
         <div class="secciones">
             <button class="btn btn-primary spacingComponents" style="width: 40%; height: 50%;" (click)="agregarDeposito()">Agregar depósito</button>
             <mat-form-field appearance="fill" class="spacingComponents">
@@ -57,6 +66,8 @@
             </tr>
           </table>
         </div>
+
+        <!-- BOTON PARA CARGAR EL NUEVO INVENTARIO -->
         <div class="botonFinalizar">
             <button class="btn btn-success spacingComponents" style="width: 50%; height: 50%;" (click)="comenzar()" [disabled]="profileForm.invalid">Comenzar</button>
         </div>

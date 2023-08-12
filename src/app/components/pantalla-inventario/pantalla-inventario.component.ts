@@ -14,6 +14,10 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class PantallaInventarioComponent {
 
+  //<---------------------------------------------------------------------------------------------------------->
+  
+  //DATA PARA IR SETEANDO VALORES
+
   nombre: any //PARA OBTENER EL NOMBRE DEL INVENTARIO
 
   idInventario: any //ID INVENTARIO
@@ -30,28 +34,43 @@ export class PantallaInventarioComponent {
   
   contadorErrores: number = 0 // CONTADOR ERRORES
 
+  //<---------------------------------------------------------------------------------------------------------->
+
+
+  //FUNCION PARA FICHAR EL PRODUCTO
   ficharProd(){
     this.api.cargarProducto(this.profileForm.value.fichador).pipe(catchError((errors: HttpErrorResponse)=>{
+      //SI NO EXISTE, TOMA EL ERROR Y DA LA NOTIFICACION
       this.toastrSvc.error(`Hubo un error al momento de intentar cargar ${this.profileForm.value.fichador}`)
+      //TRANSFORMA EL PROD A UNDEFINED
       this.prod = undefined
+      //SUMA +1 A LOS ERRORES
       this.contadorErrores = this.contadorErrores + 1
       return throwError(errors);
     })).subscribe((data)=>{
+      //TIRAMOS EL STRING AL PROD
       this.prod = data
+      //NOTIFICACION CON DETALLE DE LO QUE SE SUMA
       this.toastrSvc.success(`¡Se añadió ${this.profileForm.value.fichador} - ${this.prod} correctamente!`)
+      //SUMAMOS AL ARRAY EL STRING DEL CODIGO
       this.prodFichados?.push(this.profileForm.value.fichador)
+      //SUMAMOS +1 A FICHADOS
       this.contadorFichados = this.contadorFichados + 1
     })
   }
 
+  //FUNCION PARA BUSCAR UN INVENTARIO
   findInventario(nombre: string){
     return this.inventarios?.find((x: ListaInventarioInterface) => x.nombre === nombre);
   }
 
+  //FUNCION PARA FINALIZAR EL DETALLE DE INVENTARIO
   finalizar(){
+    //SI EL CONTADOR DE PRODUCTOS ESTA EN 0
     if(this.contadorFichados == 0){
       this.toastrSvc.warning('No se puede guardar el detalle del inventario sin fichar ningún producto')
     } else {
+      //OBJETO QUE PASAMOS A LA API
       let inventario = {
         InventarioId: this.idInventario,
         CodUbicacion: this.profileForm.value.ubicacion,
@@ -72,6 +91,7 @@ export class PantallaInventarioComponent {
     contadorFichados: new FormControl(this.contadorFichados),
     contadorErrores: new FormControl(this.contadorErrores)
   });
+
 
   constructor(private api: ApiService, private toastrSvc: ToastrService, private route: ActivatedRoute) {}
 

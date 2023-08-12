@@ -1,12 +1,17 @@
 <form class="container-fluid" [formGroup]="profileForm">
     <div class="card card-body">
+
+        <!-- NOMBRE DEL INVENTARIO SECCION -->
         <div class="seccion1">
             <h2 class="spacingComponents">Inventario:</h2>
             <mat-form-field class="spacingComponents" appearance="fill">
                 <mat-label>Nombre del inventario</mat-label>
+                <!-- TRAE LOS DATOS QUE SE CARGAN AL INICIO DE LA PAGINA DEL ID DEL INVENTARIO + EL NOMBRE. NO SE PUEDE MODIFICAR -->
                 <input matInput value="{{idInventario}} - {{nombre}}" readonly="disabled">
             </mat-form-field>
         </div>
+
+        <!-- UBICACION Y NOMBRE DE ETIQUETA SECCION -->
         <div class="seccion2">
             <div class="ubicacion">
                 <h2 class="spacingComponents">Ubicación:</h2>
@@ -23,16 +28,23 @@
                 </mat-form-field>
             </div>
         </div>
+
+        <!-- FICHADOR SECCION -->
         <div class="fichador">
             <h3 class="spacingComponents">Fichar productos</h3>
             <mat-form-field class="spacingComponents" appearance="fill">
                 <mat-label>Fichar productos</mat-label>
+                <!-- TOMA LOS QUE SE ESCRIBE DENTRO Y VERIFICA SI EXISTE EN LA BASE DE DATOS DE LOS CODIGOS -->
+                <!-- HOY SE HIZO CON UN BLUR, LO IDEAL SERIA QUE AL APRETAR ENTER O TENIENDO UN BOTON PARA MOVILES -->
                 <input matInput formControlName="fichador" (blur)="ficharProd()">
             </mat-form-field>
         </div>
+        <!-- SI EXISTE EL PRODUCTO, SE MUESTRA EL CODIGO Y EL NOMBRE -->
         <ng-template [ngIf]="prod != undefined">
             <h2>Acabas de fichar: {{this.profileForm.value.fichador}} - {{prod}}</h2>
         </ng-template>
+
+        <!-- CONTADORES FICHAJES Y ERRORES SECCION -->
         <div class="fichajes">
             <div class="artFichados">
                 <div>
@@ -57,6 +69,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- BOTONES PARA RESETAR Y CARGAR EL DETALLE -->
         <div class="botones">
             <button class="btn btn-danger spacingComponents" style="width: 50%; height: 60px;" type="reset">Resetear</button>
             <button class="btn btn-primary spacingComponents" style="width: 50%; height: 60px;" (click)="finalizar()" [disabled]="profileForm.invalid">Finalizar ubicación</button>

@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PantallaInventarioComponent } from './components/pantalla-inventario/pantalla-inventario.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ListaInventariosComponent } from './components/lista-inventarios/lista-inventarios.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     InicioComponent,
     NuevoInventarioComponent,
     PantallaInventarioComponent,
-    NavbarComponent
+    NavbarComponent,
+    ListaInventariosComponent
   ],
   imports: [
     HttpClientModule,

@@ -26,21 +26,26 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  //PARA LOS PRODUCTOS
   cargarProducto(prod: any) {
     const url = this.GET_PRODUCTOS_IND + prod;
     return this.http.get(url, {responseType: 'text'})
   }
 
+  //PARA LAS MARCAS
   obtenerMarcas(){
     const url = this.GET_MARCAS;
     return this.http.get<MarcasInterface>(url)
   }
 
+  //PARA LOS DEPOSITOS
   obtenerDepositos() {
     const url = this.GET_DEPOSITOS;
     return this.http.get<DepositosInterface>(url)
   }
 
+
+  //PARA LOS INVENTARIOS
   nuevoInvetario(inventario: Object): Observable<InventarioInterface>{
     const url = this.POST_INVENTARIO;
     return this.http.post<InventarioInterface>(url, inventario)

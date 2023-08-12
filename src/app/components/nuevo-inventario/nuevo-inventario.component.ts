@@ -13,6 +13,10 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class NuevoInventarioComponent {
 
+  //<---------------------------------------------------------------------------------------------------------->
+
+  //DATA PARA IR SETEANDO VALORES
+
   idMarcas: any = [] //ARRAY CON ID DE MARCAS EN NUMBER
   
   idDeposito: any = "" //ID DEPOSITO
@@ -29,38 +33,49 @@ export class NuevoInventarioComponent {
 
   depositoSeleccionado: any //PARA ESTABLECER EL DEPOSITO
 
+  //<---------------------------------------------------------------------------------------------------------->
+
+
+  //FUNCION PARA CREAR EL INVENTARIO
   comenzar(){
-    this.marcasSeleccionadas.forEach((value)=>{
-      this.idMarcas.push(value.id)
-    })
-    this.profileForm.value.marcas = this.idMarcas
-    this.profileForm.value.deposito = this.idDeposito
-    let inventario = {
-      Fecha: this.profileForm.value.fecha,
-      Nombre: this.profileForm.value.nombreInventario,
-      Marcas: this.profileForm.value.marcas,
-      Deposito: this.profileForm.value.deposito
-    }
-    if(this.idDeposito != "" && this.idMarcas.length !== 0){
+    //SI ID DEPOSITO ES DISTINTO A UN STRING VACIO + ID MARCAS TIENE 1 O MAS DE LARGO
+    if(this.idDeposito != "" && this.marcasSeleccionadas.length !== 0){
+      this.marcasSeleccionadas.forEach((value)=>{
+        this.idMarcas.push(value.id) //ARMAR UN ARRAY DE LOS ID (TIENE QUE SER TYPE NUMBER PORQUE ASI LO EXIGE LA API)
+      })
+      //PASANDO PARAMETROS AL FORM DE LOS ID ANTERIORMENTE RECEPTADOS + EL ID DEL DEPOSITO
+      this.profileForm.value.deposito = this.idDeposito
+      this.profileForm.value.marcas = this.idMarcas 
+      //OBJETO QUE VAMOS A PASAR A LA API
+      let inventario = {
+        Fecha: this.profileForm.value.fecha,
+        Nombre: this.profileForm.value.nombreInventario,
+        Marcas: this.profileForm.value.marcas,
+        Deposito: this.profileForm.value.deposito
+      }
       this.api.nuevoInvetario(inventario).subscribe((data)=>{
         console.log(data)
       })
       this.router.navigate(["pantallainventario/" + this.profileForm.value.nombreInventario])
-    } else if (this.idDeposito == "" && this.idMarcas.length !== 0){
+    } //SI EL ID DEPOSITO ES UN STRING VACIO
+      else if (this.idDeposito == "" && this.idMarcas.length !== 0){
       this.toastrSvc.warning('No seleccionaste ningún depósito')
-    } else {
+    } //SI EL ID DEPOSITO NO ES UN STRING VACIO PERO EL ID MARCAS ES IGUAL A 0
+      else {
       this.toastrSvc.warning('No seleccionaste ninguna marca')
     }
   }
 
+
+  //FUNCION PARA BUSCAR ENTRE LAS MARCAS DE LA API
   findMarca(id: any){
     return this.marcas.find((x: MarcasInterface) => x.id == id);
   }
-
+  //FUNCION PARA BUSCAR ENTRE LAS MARCAS QUE SE FUERON SETEANDO
   findMarcaSeleccionada(id: any){
     return this.marcasSeleccionadas.find((x: MarcasInterface) => x.id == id);
   }
-
+  //FUNCION PARA AGREGAR MARCA (CONTROLA SI YA ESTA, EN CASO DE QUE NO SE ENCUENTRE LA SETEA)
   agregarMarca(){
     this.marcaSeleccionada = this.findMarca(this.marca.value)
     if(this.findMarcaSeleccionada(this.marca.value) == undefined){
@@ -71,19 +86,21 @@ export class NuevoInventarioComponent {
     }
   }
 
+
+  //FUNCION PARA BUSCAR ENTRE LOS DEPOSITOS DE LA API
   findDeposito(id: any){
     return this.depositos.find((x: DepositosInterface) => x.id == id);
   }
-
+  //FUNCION PARA AGREGAR EL DEPOSITO SELECCIONADO
   agregarDeposito(){
     this.depositoSeleccionado = this.findDeposito(this.depo.value)
     this.idDeposito = this.depositoSeleccionado.id
   }
 
+
   //FORM CONTROLS PARA USO DE LA PAGINA
   marca = new FormControl('');
   depo = new FormControl('')
-
   //FORMULARIO PARA CREAR INVENTARIO
   profileForm = new FormGroup({
     nombreInventario: new FormControl('', Validators.required),
@@ -91,6 +108,7 @@ export class NuevoInventarioComponent {
     marcas: new FormControl(this.idMarcas),
     deposito: new FormControl(this.idDeposito)
   });
+
 
   constructor(private router: Router, private api: ApiService, private toastrSvc: ToastrService){}
 
